@@ -1,8 +1,12 @@
 # DL_Course_Project
 Project repository for Deep learning course project assignment.
+
 Students:
+
 Vladimir Kulikov
+
 Daniel Bracha
+
 # Goal - Using StyleGAN2-ADA to improve classification accuracy on small datasets 
 It is known that to train a good deep learning image classifier, it is required to have a sufficiently large training dataset. But what if the training data size is limited? In this project we will attempt to remedy this problem by utilizing the pytorch version of StyleGAN2-ADA (https://github.com/NVlabs/stylegan2-ada-pytorch).
 
@@ -48,24 +52,39 @@ python train.py --outdir=./trained_gan --data=./gan_in --kimg=1000
 python generate.py --outdir=generated_out --network=./trained_gan --seed=1-1000
 ```
 notes:
+
 ./saved_images_dir - should contain the images saved after crop and normalization by pytorch (set need_save=True in the notebook and specify path).
+
 ./generated_out - will contain 1000 new artificially generated images.
 
 ### Merging the data
 After generating seperate images for both classes you can merge them with the original training data to create the modified dataset for the second classifier.
 Thus, as a result, the second classifier shall contain 2600 training images as opposed to 600 of the first classifier.
 
-### Some artificially generated examples:
+### Some artificially generated examples (cherry picked):
 Ice-cream:
 
+![alt text](https://github.com/fallenshock/DL_Course_Project/blob/main/GAN_results/ic/seed0003.png)
+![alt text](https://github.com/fallenshock/DL_Course_Project/blob/main/GAN_results/ic/seed0224.png)
+![alt text](https://github.com/fallenshock/DL_Course_Project/blob/main/GAN_results/ic/seed0479.png)
+![alt text](https://github.com/fallenshock/DL_Course_Project/blob/main/GAN_results/ic/seed0956.png)
+
 Waffles:
+
+![alt text](https://github.com/fallenshock/DL_Course_Project/blob/main/GAN_results/w/seed0011.png)
+![alt text](https://github.com/fallenshock/DL_Course_Project/blob/main/GAN_results/w/seed0020.png)
+![alt text](https://github.com/fallenshock/DL_Course_Project/blob/main/GAN_results/w/seed0082.png)
+![alt text](https://github.com/fallenshock/DL_Course_Project/blob/main/GAN_results/w/seed0268.png)
+
 ## Project flow
 The whole project was done in colab using the supplied notebook (training_classifiers.ipynb) - With the exception of training the GAN, which was executed on a remote machine because of the time constraints imposed by Google Colab, the code for running the GAN (after cloning the StyleGAN2-ADA repository) is given in the 'Creating the artificial data' section and also inside a markdown cell in the notebook at the appropriate section.
 
 
 # Results
-#
 
+The final test accuracy for model_orig is 83.67%
+
+The final test accuracy for model_orig is 85.71%
 
 
 
