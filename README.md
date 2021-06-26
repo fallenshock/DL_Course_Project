@@ -86,14 +86,31 @@ We've conducted several experiments with different number of epochs and number o
 |exp No.| Num Epochs |fake data (for each class)| model_orig Test Accuracy | model_gan Test Accuracy 
 | :-----| :--------- | :----------------------- | :----------------------- | :------------------------
 | `1`   | `15`       | `1000`                   | 83.67%                   | 85.71%
-| `2`   | `25`       | `2000`                   | 83.81%                   | 81.94%
-| `3`   | `15`       | `2000`                   | 81.63%                   | 87.76%
+| `2`   | `15`       | `2000`                   | 81.63%                   | 87.76%
+| `3`   | `25`       | `2000`                   | 82.65%                   | 82.65%
 
 Reminder : `model_orig` is the first classifier, that is trained only on the original data. `model_gan` is trained on both original and the GAN generated data.
-* note: there's a slight variance in test accuracy for model_orig in experiments 1 & 3 - we expected the same accuracy but the randomized validation set might be the cause for the difference.
+* note:* there's a slight variance in test accuracy for model_orig in experiments 1 & 3 - we expected the same accuracy but the randomized validation set might be the cause for the difference.
+
+## graphs
+exp No. 1 val_accuracy vs epoch
+<figure>
+  <img src="https://github.com/fallenshock/DL_Course_Project/blob/main/graphs/graph_83_85.png"  />
+</figure>
+
+exp No. 2 val_accuracy vs epoch
+<figure>
+  <img src="https://github.com/fallenshock/DL_Course_Project/blob/main/graphs/graph_81_87.png"  />
+</figure>
+
+exp No. 3 val_accuracy vs epoch
+<figure>
+  <img src="https://github.com/fallenshock/DL_Course_Project/blob/main/graphs/graph_82_82.png"  />
+</figure>
+
 ## Discussion
 We can see that a better test accuracy is usually achieved when using StyleGAN2-Ada to create fake training images.
-We also noticed that the best results were for `model_gan` with 2000 fake images for each class and 15 training epochs. When we increase the number of epochs, the model starts to lose it's edge over the original model. We assume that this is because `model_gan` starts to overfit on the fake data, and gets a lower score on the test set (as seen in experiment 2).
+We also noticed that the best results were for `model_gan` with 2000 fake images for each class and 15 training epochs. When we increase the number of epochs, the model starts to lose it's edge over the original model. We assume that this is because `model_gan` starts to overfit on the fake data, and gets a lower score on the test set (as seen in experiment 3).
 In addition, we see that more fake data yields better results on the test set. Although we must be careful not to add to much, because the risk of overfitting on the fake data becomes more significant.
 
 
