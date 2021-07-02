@@ -15,7 +15,7 @@ The whole project is based on Pytorch.
 StyleGAN2-ADA is a GAN which learns to create new images that are similar to those in the training set. For example, the creators of this model trained it on real human faces and the resulting images generated can be seen here: https://thispersondoesnotexist.com/ - each visit to the webpage generates a new face which doesnt actually exist.
 The ADA suffix stands for 'adaptive discriminator augmentation' which means that a special augmentation pipeline is applied to the data to help stabilize the GAN in limited training data regimes. This characteristic is very beneficial to our cause, as we will be using the GAN to artificially enlarge the small dataset available for training our classifier.
 # Dataset
-In this project we use a small dataset of 2 classes (Ice-cream and Waffles) created by sapa16. Link: https://www.kaggle.com/sapal6/waffles-or-icecream.
+In this project we use a small dataset of 2 classes (Ice-cream and Waffles) created by sapal6. Link: https://www.kaggle.com/sapal6/waffles-or-icecream.
 The dataset contains 343 samples for Ice-cream and 355 samples for Waffles.
 
 We divided the first 300 images of both classes for the train set, and the remaining ~50 for the test set.
@@ -108,11 +108,30 @@ exp No. 3 val_accuracy vs epoch
   <img src="https://github.com/fallenshock/DL_Course_Project/blob/main/graphs/graph_82_82.png"  />
 </figure>
 
+## Comparing results with classic data augmentations
+We also conducted an experiment where we train the model on the original train set with classic data augmentations: Color jitter and random horizontal flip:
+|exp No.| Num Epochs |augmentations                         | model_orig Test Accuracy 
+| :-----| :--------- | :----------------------------------- | :----------------------- 
+| `4`   | `25`       | `ColorJitter`,`RandomHorizontalFlip` | 86.73%                   
+
 ## Discussion
 We can see that a better test accuracy is usually achieved when using StyleGAN2-Ada to create fake training images.
 We also noticed that the best results were for `model_gan` with 2000 fake images for each class and 15 training epochs. When we increase the number of epochs, the model starts to lose it's edge over the original model. We assume that this is because `model_gan` starts to overfit on the fake data, and gets a lower score on the test set (as seen in experiment 3).
 In addition, we see that more fake data yields better results on the test set. Although we must be careful not to add to much, because the risk of overfitting on the fake data becomes more significant.
+Also, using classic data augmentation achieves a similar improvement on the test accuracy (86.73%) - Only slightly worse than the results with StyleGAN2-ADA.
 
+# Conclusion
 
+In this project, we we've shown a proof of concept that using StyleGAN2-ADA to increase the size of a small training set for an image classification task improved the final test accuracy by 2-5% on average. Of course, this was tested only on one model (VGG16) with mostly fixed hyperparameters , and on one dataset (waffles-or-icecream by Sapal6).
+The results were compared with classic data augmentations (color jitter and random H-flip) and it was shown that the GAN method yielded slighty better results.
+
+## Future work
+
+This project can be expanded to experiment with:
+- Different Classifier Architectures & Transfer Learning (Code ready in notebook).
+- Different Classifier Hyperparameters such as lr, scheduler, optimizer, data augmentations etc.
+- Train StyleGAN2-ADA for longer ('kimg' parameter) - Read documentation in their git.
+- Experiment with a different dataset.
+- test with a larger generated dataset for each class
 
 
