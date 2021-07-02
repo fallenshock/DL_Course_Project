@@ -134,4 +134,7 @@ This project can be expanded to experiment with:
 - Experiment with a different dataset.
 - test with a larger generated dataset for each class
 
-
+# References
+- StyleGAN2-ADA(Pytorch): https://github.com/NVlabs/stylegan2-ada-pytorch
+- waffles-or-icecream by Sapal6: https://www.kaggle.com/sapal6/waffles-or-icecream
+- Notebook code reference from tutorial 9 in Technion ee046211 deep learning course: https://github.com/taldatech/ee046211-deep-learning
